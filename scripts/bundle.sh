@@ -31,6 +31,10 @@ copy_dependencies() {
       ld-linux*.so*|libc.so.*|libdl.so.*|libm.so.*|libnss_*.so.*|libpthread.so.*|libresolv.so.*|librt.so.*|libutil.so.*) continue ;;
     esac
     test -z "${copied[$name]:-}" || continue
+    if test -e "$prefix/lib/$name"; then
+      copied[$name]=1
+      continue
+    fi
     install -m 0755 -T "$dependency" "$prefix/lib/$name"
     copied[$name]=1
   done < <(LD_LIBRARY_PATH="$prefix/lib:$library_path" ldd "$object" \

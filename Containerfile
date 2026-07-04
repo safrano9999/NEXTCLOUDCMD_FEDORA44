@@ -9,7 +9,7 @@ RUN dnf install -y --setopt=install_weak_deps=False \
       kf6-karchive-devel libp11-devel ninja-build openssl-devel pkgconf-pkg-config \
       qt6-qt5compat-devel qt6-qtbase-devel qt6-qtbase-private-devel qt6-qtsvg-devel \
       qt6-qttools qt6-qttools-devel qt6-qtwebsockets-devel qtkeychain-qt6-devel \
-      qtsingleapplication-qt6-devel sqlite-devel zlib-devel \
+      kdsingleapplication-qt6-devel sqlite-devel zlib-devel \
  && dnf clean all
 
 WORKDIR /src

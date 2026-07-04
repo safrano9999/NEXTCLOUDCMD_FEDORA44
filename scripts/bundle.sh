@@ -52,7 +52,7 @@ while IFS= read -r plugin; do copy_dependencies "$plugin"; done \
 cat > "$prefix/bin/nextcloudcmd" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-root=/opt/nextcloudcmd
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 export LD_LIBRARY_PATH="$root/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 export QT_PLUGIN_PATH="$root/plugins${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}"
 exec "$root/libexec/nextcloudcmd" "$@"

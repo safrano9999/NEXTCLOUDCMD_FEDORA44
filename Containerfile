@@ -34,7 +34,10 @@ RUN cmake -S /src -B /build -G Ninja \
       -DNO_SHIBBOLETH=ON \
       -DWITH_PROVIDERS=OFF \
  && cmake --build /build --target nextcloudcmd --parallel "$(nproc)" \
- && DESTDIR=/stage cmake --install /build
+ && mkdir -p /stage/usr/bin /stage/usr/lib64 /stage/etc/Nextcloud \
+ && install -m 0755 /build/bin/nextcloudcmd /stage/usr/bin/nextcloudcmd \
+ && cp -a /build/bin/libnextcloudsync.so* /build/bin/libnextcloud_csync.so* /stage/usr/lib64/ \
+ && install -m 0644 /src/sync-exclude.lst /stage/etc/Nextcloud/sync-exclude.lst
 
 FROM builder AS bundler
 COPY scripts/bundle.sh /usr/local/bin/bundle-nextcloudcmd
